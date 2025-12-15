@@ -25,6 +25,6 @@ encodeListKnown = find_encodings(images)
 print(len(encodeListKnown))
 print('Encoding Complete')
 
-with open('face_rec', 'wb') as file:
+with open('data/face_rec', 'wb') as file:
     pickle.dump(encodeListKnown, file)
     file.close()

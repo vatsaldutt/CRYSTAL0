@@ -8,9 +8,14 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from screeninfo import get_monitors
+import os
 
 width = get_monitors()[0].width
 height = get_monitors()[0].height
+
+def directory_path(filename):
+    path = os.path.join("./", 'img', 'UI', filename)
+    return path
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -21,31 +26,41 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, width/0.9994794377928162, height/1.078921078921079))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("Desktop a.jpg"))
+        self.label.setPixmap(QtGui.QPixmap(directory_path("Desktop a.jpg")))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(width/2.3132530120481927, height/3, width/6.378737541528239, width/6.378737541528239))
+        self.label_2.setGeometry(
+            QtCore.QRect(
+                width / 2.3132530120481927,
+                height / 3,
+                width / 6.378737541528239,
+                width / 6.378737541528239
+            )
+        )
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("Crystal new.gif"))
-        self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
+        self.movie_2 = QtGui.QMovie(directory_path("Crystal new.gif"))
+        self.movie_2.setScaledSize(self.label_2.size())
+        self.label_2.setMovie(self.movie_2)
+        self.movie_2.start()
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(width/5.64, height/12, width/4, height/3.5))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("Detail.jpg"))
+        self.label_3.setPixmap(QtGui.QPixmap(directory_path("Detail.jpg")))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(width/12, height/3, width/4, height/3.5))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("Detail.jpg"))
+        self.label_4.setPixmap(QtGui.QPixmap(directory_path("Detail.jpg")))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(width/5.33, height/1.7142857142857142, width/4, height/3.5))
         self.label_5.setText("")
-        self.label_5.setPixmap(QtGui.QPixmap("Detail.jpg"))
+        self.label_5.setPixmap(QtGui.QPixmap(directory_path("Detail.jpg")))
         self.label_5.setScaledContents(True)
         self.label_5.setObjectName("label_5")
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
@@ -93,13 +108,13 @@ class Ui_MainWindow(object):
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(width/1.71, height/18, width/2.7, height/2.24))
         self.label_6.setText("")
-        self.label_6.setPixmap(QtGui.QPixmap("Details.png"))
+        self.label_6.setPixmap(QtGui.QPixmap(directory_path("Details.png")))
         self.label_6.setScaledContents(True)
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(width/1.71, height/2.20, width/2.7, height/2.24))
         self.label_7.setText("")
-        self.label_7.setPixmap(QtGui.QPixmap("Details.png"))
+        self.label_7.setPixmap(QtGui.QPixmap(directory_path("Details.png")))
         self.label_7.setScaledContents(True)
         self.label_7.setObjectName("label_7")
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
@@ -205,7 +220,7 @@ class Ui_MainWindow(object):
         self.pushButton_14.setText("")
         self.pushButton_14.setObjectName("pushButton_14")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Apps/Discover.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("img/Apps/Discover.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_14.setIcon(icon)
         self.pushButton_14.setIconSize(QtCore.QSize(width/27.04225352112676, height/15.211267605633802))
         self.pushButton_15 = QtWidgets.QPushButton(self.centralwidget)

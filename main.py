@@ -2,7 +2,6 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView as QWebView
 from selenium.webdriver.chrome.service import Service
 from PyQt5.QtCore import QTimer, QTime, QDate, Qt
 from nltk.stem.lancaster import LancasterStemmer
-from PyQt5 import QtCore, QtGui
 from googletrans import Translator
 from PyQt5.QtPrintSupport import * 
 from keras.models import Sequential
@@ -16,6 +15,7 @@ from PyQt5.QtWidgets import *
 from bs4 import BeautifulSoup
 from PyQt5.QtCore import * 
 from PyQt5.QtGui import *
+from PyQt5 import QtCore
 import face_recognition
 from gtts import gTTS
 import datetime
@@ -38,7 +38,7 @@ import os
 
 response = ""
 
-selected_lang_var = open("lang.txt", 'r').read()
+selected_lang_var = open("data/lang.txt", 'r').read()
 
 stemmer = LancasterStemmer()
 
@@ -222,11 +222,11 @@ sorry_list = ["I am sorry, I could not understand that",
               "I am not sure I understand that",
               "I am sorry, I don't get that"]
 
-with open("intents.json") as file:
+with open("data/intents.json") as file:
     data = json.load(file)
 
 try:
-    with open("data.pickle", "rb") as f:
+    with open("data/data.pickle", "rb") as f:
         words, labels, training, output = pickle.load(f)
 except:
     words = []
@@ -274,7 +274,7 @@ except:
     training = numpy.array(training)
     output = numpy.array(output)
 
-    with open("data.pickle", "wb") as f:
+    with open("data/data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
 
 model = Sequential()
@@ -289,7 +289,7 @@ model.compile(
     metrics=['accuracy']
 )
 
-model_file = "model.keras.weights.h5"
+model_file = "data/model.keras.weights.h5"
 
 if os.path.exists(model_file):
     model.load_weights(model_file)
@@ -357,7 +357,7 @@ class MainThread(QThread):
         cap = cv2.VideoCapture(0)
         name = ''
 
-        with open('face_rec', 'rb') as file:
+        with open('data/face_rec', 'rb') as file:
             encodeListKnown = pickle.load(file)
 
         while name == '':
@@ -642,9 +642,6 @@ class Main(QMainWindow):
 
     
     def startTask(self):
-        self.ui.movie = QtGui.QMovie("Crystal new.gif")
-        self.ui.label_2.setMovie(self.ui.movie)
-        self.ui.movie.start()
         timer = QTimer(self)
         timer.timeout.connect(self.showTime)
         timer.start(1000)
