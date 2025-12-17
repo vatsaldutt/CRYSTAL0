@@ -10,7 +10,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import SGD
 
-with open("data/intents.json") as file:
+with open("intents.json") as file:
     data = json.load(file)
 
 words = []
@@ -67,12 +67,12 @@ model.add(Dense(len(output[0]), activation='softmax'))
 optimizer = SGD(learning_rate=0.01, momentum=0.9)
 model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
-model_file = "data/model.keras.weights.h5"
+model_file = "model.keras.weights.h5"
 
 model.fit(training, output, epochs=1000, batch_size=8, verbose=1)
 model.save_weights(model_file)
 
-with open("data/data.pickle", "wb") as f:
+with open("data.pickle", "wb") as f:
     pickle.dump((words, labels, training, output), f)
 
 
